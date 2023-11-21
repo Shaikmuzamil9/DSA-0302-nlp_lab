@@ -1,0 +1,46 @@
+import numpy as np
+from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.model_selection import train_test_split
+from sklearn.naive_bayes import MultinomialNB
+from sklearn import metrics
+documents = [
+    {'text': 'This is a positive document', 'label': 'positive'},
+    {'text': 'Negative sentiment in this one', 'label': 'negative'},
+    {'text': 'Spam! You won a prize!', 'label': 'spam'},
+    {'text': 'Another positive example', 'label': 'positive'},
+    {'text': 'More negative text for testing', 'label': 'negative'},
+    {'text': 'Congratulations! You are selected as a winner!', 'label': 'spam'},
+]
+texts = [doc['text'] for doc in documents]
+labels = [doc['label'] for doc in documents]
+text_train, text_test, label_train, label_test = train_test_split(texts, labels, test_size=0.2, random_state=42)
+vectorizer = CountVectorizer()
+X_train = vectorizer.fit_transform(text_train)
+import numpy as np
+from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.model_selection import train_test_split
+from sklearn.naive_bayes import MultinomialNB
+from sklearn import metrics
+documents = [
+    {'text': 'This is a positive document', 'label': 'positive'},
+    {'text': 'Negative sentiment in this one', 'label': 'negative'},
+    {'text': 'Spam! You won a prize!', 'label': 'spam'},
+    {'text': 'Another positive example', 'label': 'positive'},
+    {'text': 'More negative text for testing', 'label': 'negative'},
+    {'text': 'Congratulations! You are selected as a winner!', 'label': 'spam'},
+]
+
+texts = [doc['text'] for doc in documents]
+labels = [doc['label'] for doc in documents]
+text_train, text_test, label_train, label_test = train_test_split(texts, labels, test_size=0.2, random_state=42)
+vectorizer = CountVectorizer()
+X_train = vectorizer.fit_transform(text_train)
+X_test = vectorizer.transform(text_test)
+classifier = MultinomialNB()
+classifier.fit(X_train, label_train)
+predictions = classifier.predict(X_test)
+print("Classification Report:")
+print(metrics.classification_report(label_test, predictions))
+print("\nConfusion Matrix:")
+print(metrics.confusion_matrix(label_test,predictions))
+     
